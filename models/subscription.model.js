@@ -18,7 +18,7 @@ const subscriptionSchema = new mongoose.Schema({
     enum: ['USD','EUR','GBP'],
     default: 'USD'
  },
- freequency: {
+ frequency: {
     type: String,
     enum: ['daily', 'weekly', 'monthly', 'yearly'],
     required: true,  
@@ -76,7 +76,7 @@ subscriptionSchema.pre('save', function(next){
             yearly: 365,
         };
         this.renewalDate = new Date(this.startDate);
-        this.renewalDate.setDate(this.renewalDate.getDate() + renewalPeriods[this.freequency]);
+        this.renewalDate.setDate(this.renewalDate.getDate() + renewalPeriods[this.frequency]);
     }
    //Auto-update the status if renewal date has passed
    if(this.renewalDate < new Date()){
